@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한권</title>
+</head>
+<body>
+    <h1>리스트페이지임</h1>
+    <table>
+        {% for content in contents %}
+        <tr>
+            <td>{{ content.id }}</td>
+            <td><a href="{% url 'blogdetails' content.pk %}">{{ content.title }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="/blogwrite/">글쓰기</a></p>
+
+</body>
+</html>
