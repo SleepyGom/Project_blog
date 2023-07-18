@@ -4,7 +4,7 @@ from blog.views import index, bloglist, blogdetails, blogwrite, create, edit, de
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',Index),
+    path('',index),
     path('bloglist/',bloglist),
     path('bloglist/<int:pk>',blogdetails, name='blogdetails'),
     path('blogwrite/',blogwrite),
