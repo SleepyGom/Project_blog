@@ -12,7 +12,10 @@
         {% for content in contents %}
         <tr>
             <td>{{ content.id }}</td>
-            <td><a href="{% url 'blogdetails' content.pk %}">{{ content.title }}</a></td>
+            <td>
+                <a href="{% url 'blogdetails' content.pk %}">{{ content.title }}</a>
+                <a href="{% url 'delete' content.pk %}">X</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
