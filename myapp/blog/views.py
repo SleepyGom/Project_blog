@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from .models import Content
 
 def index(request):
@@ -46,12 +47,22 @@ def edit(request,pk):
         content.save()
         return redirect('/bloglist/' + str(content.pk))
     else:
-        content = Content.objects.all()
-        return render(request, 'blog/edit.html')
+        content = Content.objects.get(pk=pk)
+        return render(request, 'blog/edit.html', {'content':content})
     
 
 def delete(request,pk):
     content = Content.objects.get(pk=pk)
     content.delete()
     return redirect('/bloglist/')
-    
+
+
+def search(request):
+    content_list = Content.objects.all().order_by('-id')
+    search = request.GET.get('search',"")
+    print(search)
+    if search:
+        content_list = content_list.filter(title__icontains=search)
+        return render(request, 'blog/search.html', {'content_list':content_list,'search':search})
+    else:
+        return render(request, 'blog/search.html')

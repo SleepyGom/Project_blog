@@ -20,6 +20,14 @@
         {% endfor %}
     </table>
     <p><a href="/blogwrite/">글쓰기</a></p>
+    <form action="{% url 'search' %}" method="get">
+        {% csrf_token %}
+
+        <div id="search">
+            <input type="search" value="{{search}}" name="search">
+            <button type="submit">go!</button>
+        </div>
+    </form>
 
 </body>
 </html>
