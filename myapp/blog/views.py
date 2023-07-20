@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib import auth
 from .models import Content
 
 def index(request):
-    return render(request, 'blog/index.html')
+    contents = Content.objects.all()
+
+    context = {
+        'contents' : contents
+    }
+    return render(request, 'blog/index.html',context)
 
 def bloglist(request):
     contents = Content.objects.all()
@@ -26,7 +33,10 @@ def blogdetails(request, pk):
 
 
 def blogwrite(request):
-    return render(request, 'blog/write.html')
+    if auth.authenticate:
+        return render(request, 'blog/write.html')
+    else:
+        return render(request, 'blog/bloglist.html')
 
 
 
@@ -54,7 +64,7 @@ def edit(request,pk):
 def delete(request,pk):
     content = Content.objects.get(pk=pk)
     content.delete()
-    return redirect('/bloglist/')
+    return redirect('/')
 
 
 def search(request):

@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한권</title>
-</head>
-<body>
-    <h1>디테일 페이지임</h1>
-    <h2>{{ content.title }}</h2>
-    <p>{{ content.content }}</p>
-    <a href="/bloglist/">목록</a>
-    <a href="{% url 'edit' pk=content.pk %}">수정하기</a>
-</body>
-</html>
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<article class="detail_form">
+    <div class="detail_wrap">
+        <div class="detail_title">
+            <h2>{{ content.title }}</h2>
+        </div>
+        <div class="detail_content">
+            <p>{{ content.content }}</p>
+        </div>
+        <div class="detail_footer">
+            <a href="{% url 'index' %}">목록</a>
+            <a href="{% url 'edit' pk=content.pk %}">수정하기</a>
+            <a href="{% url 'delete' content.pk%}">삭제</a>
+        </div>
+    </div>
+</article>
+
+{% endblock %}

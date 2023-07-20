@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한권</title>
-</head>
-<body>
-    <h1>글쓰기임</h1>
-    <form action="{% url 'create' %}">
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<article class="write_form">
+    <form action="{% url 'create' %}" class="write_area">
         {% csrf_token %}
-        <h2>제목 :</h2>
-        <input type="text" name="title">
-        <h2>내용 :</h2>
-        <textarea cols="40" rows="10" name="content"></textarea>
-        <input type="submit" vlaue="제출">
+        <div class="write_title_area">
+            <label for="title" class="write_title">제목 :</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div class="write_content_area">
+            <label for="write_content">내용 :</label>
+            <textarea cols="40" rows="10" name="content" id="write_content"></textarea>
+        </div>
+        <input type="submit" vlaue="제출" class="btn">
     </form>
-</body>
-</html>
+</article>
+{% endblock %}

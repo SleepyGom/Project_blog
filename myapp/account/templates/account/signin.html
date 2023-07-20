@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한곡</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <article class="reg_form">
+        <form action="{% url 'signin'%}" method="post" class="reg_wrap">
+            {% csrf_token %}
+            <a href="{% url 'index' %}"><h1>하루 한곡</h1></a>
+            <div class="id_area">
+                <label for="reg_id">USERNAME</label>
+                <input type="text" name="username" value="" id="reg_id" class="reg">
+            </div>
+            <div class="pw_area">
+                <label for="password">PASSWORD</label>
+                <input type="password" name="password" value="" id="password" class="reg">
+            </div>
+            <div class="pw_confirm">
+                <label for="password_confirm">PASSWORD CONFIRM</label>
+                <input type="password" name="confirm" value="" id="password_confirm" class="reg confirm">
+            </div>
+            <input type="submit" vlaue="SIGNIN" class="reg_btn">
+        </form>
+    </article>
+</body>
+</html>

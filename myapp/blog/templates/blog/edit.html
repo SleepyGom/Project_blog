@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한곡</title>
-</head>
-<body>
-    <h1>수정 페이지임</h1>
-    <form action="{% url 'edit' content.id%}" method="POST">
-        {% csrf_token %}
-        <h2>제목 :</h2>
-        <input type="text" name="title" value="{{content.title}}">
-        <h2>내용 :</h2>
-        <textarea cols="40" rows="10" name="content">{{content.content}}</textarea>
-        <input type="submit" vlaue="수정하기">
-    </form>
+{% extends 'blog/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+<article class="edit_form">
+    <form action="{% url 'edit' content.id%}" method="POST" class="edit_area">
+        {% csrf_token %}
+        <div class="edit_title_area">
+            <label for="edit_title" class="edit_title">제목 :</label>
+            <input type="text" name="title" value="{{content.title}}" id="edit_title">
+        </div>
+        <div class="edit_content_area">
+            <label for="edit_content" class="edit_content">내용 :</label>
+            <textarea cols="40" rows="10" name="content" id="edit_content">{{content.content}}</textarea>
+        </div>
+        <input type="submit" vlaue="수정하기" class="btn">
+    </form>
+</article>
+{% endblock %}

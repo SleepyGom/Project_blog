@@ -1,13 +1,31 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하루한곡</title>
-</head>
-<body>
-    <h1>메인페이지임</h1>
-    <a href="/bloglist/">리스트 보러가기</a>
-</body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <article class="contents">
+        <div class="content_wrap">
+            {% for content in contents %}
+
+                <div class="content">
+                    <a href="{% url 'blogdetails' content.pk %}">
+                        <div class="content_title">
+                            <p>{{ content.title }}</p>
+                        </div>
+                    </a>
+                </div>
+
+            {% endfor %}
+        </div>
+    </article>
+    <article class="content_footer">
+        <p class="write"><a href="{% url 'write' %}">글쓰기</a></p>
+        <form action="{% url 'search' %}" method="get">
+            {% csrf_token %}
+            <div id="search">
+                <input type="search" value="{{search}}" name="search">
+                <button type="submit" class="search_go">go!</button>
+            </div>
+        </form>
+    </article>
+{% endblock %}

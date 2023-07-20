@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루한곡</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    {% if error %}
+    {{ error }}
+    {% endif %}
+    <article class="login_form">
+        <form action="{% url 'login' %}" method="post" class="login_wrap">
+            {% csrf_token %}
+            <a href="{% url 'index' %}"><h1>하루 한곡</h1></a>
+            <div class="id_area">
+                <label for="login_id">USERNAME</label>
+                <input type="username" name="username" id="login_id" class="login">
+            </div>
+            <div class="pw_area">
+                <label for="login_pw">PASSWORD</label>
+                <input type="password" name="password" id="login_pw" class="login">
+            </div>
+            <input type="submit" value="LOGIN" class="login_btn">
+            <a href="{% url 'signin' %}" class="reg_btn">혹시 계정이 없으신가요?</a>
+        </form>
+    </article>
+</body>
+</html>

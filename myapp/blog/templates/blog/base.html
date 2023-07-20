@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루 한곡</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <section class="user">
+        <ul>
+            <li><a href="">마이페이지</a></li>
+            <li><a href="">찜</a></li>
+        </ul>
+        <p>안녕하세요! {{ user.username }} 님</p>
+    </section>
+    {% endif %}
+    <section class="top">
+        <div class="logo">
+            <a href="{% url 'index' %}"><h1>하루 <span>한곡</span></h1></a>
+        </div>
+        <div class="top_nav">
+            <ul>
+                <li><a href="#">오늘의 추천</a></li>
+                <li><a href="#">인기 많은</a></li>
+                <li><a href="#">분위게에 맞는</a></li>
+                <li><a href="#">장르</a></li>
+                {%if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn logout">로그아웃</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" ><li class="btn login">로그인</li></a>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
