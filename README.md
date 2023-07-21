@@ -140,9 +140,11 @@ Mini_project_Blog
 # 4. 실행 화면
 ## 4.1 유저 기능
    * 회원가입
-![127 0 0 1_8000_signin_](https://github.com/SleepyGom/Project_blog/assets/93717960/d2dbfb4b-3b8b-4622-bb1c-454c3b92b018)
+![127 0 0 1_8000_signin_ (1)](https://github.com/SleepyGom/Project_blog/assets/93717960/d59856ae-877d-46c0-9a7c-c06d3cd3c001)
+
    * 로그인      
 ![127 0 0 1_8000_login_](https://github.com/SleepyGom/Project_blog/assets/93717960/800ef31b-0595-4470-a222-f82eb5af4ddc)
+
   * 메인 및 로그아웃
 ![127 0 0 1_8000_](https://github.com/SleepyGom/Project_blog/assets/93717960/ff716e5e-e2ba-496d-b592-6e713d1edd7e)
 
@@ -151,10 +153,11 @@ Mini_project_Blog
 ![127 0 0 1_8000_bloglist_9](https://github.com/SleepyGom/Project_blog/assets/93717960/49643e03-2c8c-4410-93c8-b9f89bca3225)
 
   * 글 쓰기
-![127 0 0 1_8000_blogwrite_](https://github.com/SleepyGom/Project_blog/assets/93717960/c20d06a3-471e-4fde-96fb-38d4e2937323)
+![127 0 0 1_8000_blogwrite_ (1)](https://github.com/SleepyGom/Project_blog/assets/93717960/1c77fd09-e8f9-40ad-b9ac-ecd57270fc0d)
 
   * 글 수정
-![127 0 0 1_8000_bloglist_9_edit_](https://github.com/SleepyGom/Project_blog/assets/93717960/46f7d9f8-78dd-4de3-88f2-a640c4b69c32)
+![127 0 0 1_8000_bloglist_20_edit_](https://github.com/SleepyGom/Project_blog/assets/93717960/447112b9-6ecd-4a36-9997-877808cc7106)
+
 
   * SEARCH 기능
 ![127 0 0 1_8000_bloglist_serach__csrfmiddlewaretoken=WhYJfQGkNHnIpSz3783uilWdZ2J6m8d55lq3F8s7oE1ScPmp47RjLgp99QdL8AO4 search=%EC%B0%BE%EC%95%84](https://github.com/SleepyGom/Project_blog/assets/93717960/b26244b7-cbec-4ff4-a48b-2c2456bc5bef)
