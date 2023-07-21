@@ -138,3 +138,60 @@ Mini_project_Blog
 └─ README.md
 ```
 # 4. 실행 화면
+## 4.1 유저 기능
+   * 회원가입
+![127 0 0 1_8000_signin_](https://github.com/SleepyGom/Project_blog/assets/93717960/d2dbfb4b-3b8b-4622-bb1c-454c3b92b018)
+   * 로그인      
+![127 0 0 1_8000_login_](https://github.com/SleepyGom/Project_blog/assets/93717960/800ef31b-0595-4470-a222-f82eb5af4ddc)
+  * 메인 및 로그아웃
+![127 0 0 1_8000_](https://github.com/SleepyGom/Project_blog/assets/93717960/ff716e5e-e2ba-496d-b592-6e713d1edd7e)
+
+## 4.2 게시판 기능
+  * 디테일
+![127 0 0 1_8000_bloglist_9](https://github.com/SleepyGom/Project_blog/assets/93717960/49643e03-2c8c-4410-93c8-b9f89bca3225)
+
+  * 글 쓰기
+![127 0 0 1_8000_blogwrite_](https://github.com/SleepyGom/Project_blog/assets/93717960/c20d06a3-471e-4fde-96fb-38d4e2937323)
+
+  * 글 수정
+![127 0 0 1_8000_bloglist_9_edit_](https://github.com/SleepyGom/Project_blog/assets/93717960/46f7d9f8-78dd-4de3-88f2-a640c4b69c32)
+
+  * SEARCH 기능
+![127 0 0 1_8000_bloglist_serach__csrfmiddlewaretoken=WhYJfQGkNHnIpSz3783uilWdZ2J6m8d55lq3F8s7oE1ScPmp47RjLgp99QdL8AO4 search=%EC%B0%BE%EC%95%84](https://github.com/SleepyGom/Project_blog/assets/93717960/b26244b7-cbec-4ff4-a48b-2c2456bc5bef)
+```Django
+from django.db.models import Q
+
+def search(request):
+    content_list = Content.objects.all().order_by('-id')
+    search = request.GET.get('search',"")
+    print(search)
+    if search:
+        content_list = content_list.filter(
+                Q(title__icontains=search) |
+                Q(content__icontains=search)
+                )
+        return render(request, 'blog/search.html', {'content_list':content_list,'search':search})
+    else:
+        return render(request, 'blog/search.html')
+```
+
+# 5. 오류 사항
+ * pk 값 오류 (해결 완료)
+   ```Django
+   def edit(request,pk):
+    content = Content.objects.get(pk=pk)
+    if request.method == 'POST':
+        content.title = request.POST['title']
+        content.content = request.POST['content']
+
+        content.save()
+        return redirect('/bloglist/' + str(content.pk))
+    else:
+        content = Content.objects.get(pk=pk)
+        return render(request, 'blog/edit.html', {'content':content})
+   ```
+   위 코드에서 return 값 중에 'content' : content 값을 넘겨주기 전 content= Content.objects.all()로 파일을 넘겨서 html로 값들을 넘겨 받을 시 pk에는 아무 값이 들어가지 않았다.
+   현재는 get(pk=pk)를 이용하여 content로 넘겨주고 그 값들을 "{% url 'edit' content.id %}" 이런식으로 넘겨주어 해결하였다.
+
+
+
