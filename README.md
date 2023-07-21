@@ -148,6 +148,9 @@ Mini_project_Blog
   * 메인 및 로그아웃
 ![127 0 0 1_8000_](https://github.com/SleepyGom/Project_blog/assets/93717960/ff716e5e-e2ba-496d-b592-6e713d1edd7e)
 
+  * 메인 및 로그인
+![127 0 0 1_8000_ (1)](https://github.com/SleepyGom/Project_blog/assets/93717960/d66beece-d290-4bb0-a1b1-6991e1f06740)
+
 ## 4.2 게시판 기능
   * 디테일
 ![127 0 0 1_8000_bloglist_9](https://github.com/SleepyGom/Project_blog/assets/93717960/49643e03-2c8c-4410-93c8-b9f89bca3225)
