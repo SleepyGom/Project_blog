@@ -4,7 +4,7 @@ from blog.views import index, bloglist, blogdetails, blogwrite, create, edit, de
 from account.views import login, signin,logout
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('',index, name='index'),
     path('bloglist/',bloglist),
     path('bloglist/<int:pk>',blogdetails, name='blogdetails'),
