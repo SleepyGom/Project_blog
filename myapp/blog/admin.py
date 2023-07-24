@@ -1,6 +1,2 @@
 from django.contrib import admin
-from .models import Content
-# Register your models here.
-
-
-admin.site.register(Content)
+from .models import Post,Comment, Category, Tag

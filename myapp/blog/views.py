@@ -1,78 +1,33 @@
+from typing import Any, Dict
+from django.db.models.query import QuerySet
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DeleteView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Post, Category, Tag, Comment
+from .forms import CommentForm
+from django.utils.text import slugify
 from django.db.models import Q
-from django.contrib.auth.models import User
-from django.contrib import auth
-from .models import Content
 
-def index(request):
-    contents = Content.objects.all()
+class PostList(ListView):
+    model = Post
+    ordering = '-pk'
 
-    context = {
-        'contents' : contents
-    }
-    return render(request, 'blog/index.html',context)
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.filter(category = None).count()
+        return context
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_keyword = self.request.GET.get('q')
 
-def bloglist(request):
-    contents = Content.objects.all()
-
-    context = {
-        'contents' : contents
-    }
-    return render(request, 'blog/bloglist.html', context)
-
-
-
-def blogdetails(request, pk):
-    content = Content.objects.get(pk=pk)
-
-    context = {
-        'content' : content
-    }
-    return render(request, 'blog/blogdetail.html', context)
-
-
-
-def blogwrite(request):
-    if auth.authenticate:
-        return render(request, 'blog/write.html')
-    else:
-        return render(request, 'blog/bloglist.html')
-
-
-
-def create(request):
-    content = Content()
-    content.title = request.GET['title']
-    content.content = request.GET['content']
-    content.save()
-    return redirect('/bloglist/' + str(content.pk))
-
-
-def edit(request,pk):
-    content = Content.objects.get(pk=pk)
-    if request.method == 'POST':
-        content.title = request.POST['title']
-        content.content = request.POST['content']
-
-        content.save()
-        return redirect('/bloglist/' + str(content.pk))
-    else:
-        content = Content.objects.get(pk=pk)
-        return render(request, 'blog/edit.html', {'content':content})
+        if search_keyword:
+            queryset= queryset.filter(
+                Q(title__icontains=search_keyword) |
+                Q(content__icontains=search_keyword) |
+                Q(tags__name__icontains=search_keyword)).distinct()
+        return queryset
     
 
-def delete(request,pk):
-    content = Content.objects.get(pk=pk)
-    content.delete()
-    return redirect('/')
-
-
-def search(request):
-    content_list = Content.objects.all().order_by('-id')
-    search = request.GET.get('search',"")
-    print(search)
-    if search:
-        content_list = content_list.filter(title__icontains=search)
-        return render(request, 'blog/search.html', {'content_list':content_list,'search':search})
-    else:
-        return render(request, 'blog/search.html')
+postlist = PostList.as_view()
