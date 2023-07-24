@@ -1,43 +1,27 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib import auth
-# Create your views here.
+from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import login_required
+from django.views.generic import CreateView
+from django.conf import settings
 
-# Signin
-def signin(request):
-    if request.method == 'POST':
-        if request.POST['password'] == request.POST['confirm']:
-            user = User.objects.create_user(username=request.POST['username'],
-            password = request.POST['password'])
-            auth.login(request,user)
-            return redirect('/')
-    return render(request, 'account/signin.html')
+signin = CreateView.as_view(
+    form_class = UserCreationForm,
+    template_name = 'account/signin.html',
+    success_url = settings.LOGIN_URL,
 
+)
 
-# Login
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+login = LoginView.as_view(
+    template_name = 'account/login.html',
+)
 
-        user = auth.authenticate(request,username=username, password=password)
+logout = LogoutView.as_view(
+    next_page = settings.LOGIN_URL,
+)
 
-        if user is not None:
-            auth.login(request,user)
-            return redirect('/')
-        else:
-            return render(request,'account/login.html',{'error': 'username or password is not correct please try again'})
-    else:
-        return render(request,'account/login.html')
-
-
-# Logout
-
-def logout(request):
-    if request.method == 'POST':
-        auth.logout(request)
-        return redirect('/')
-    
-    return render(request, 'account/login.html')
+@login_required
+def profile(request):
+    return render(request, 'account/profile.html')
 
 

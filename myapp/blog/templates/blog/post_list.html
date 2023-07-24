@@ -5,17 +5,8 @@
 {% block content %}
     <article class="contents">
         <div class="content_wrap">
-            {% for content in contents %}
-
-                <div class="content">
-                    <a href="{% url 'blogdetails' content.pk %}">
-                        <div class="content_title">
-                            <p>{{ content.title }}</p>
-                        </div>
-                    </a>
-                </div>
-
-            {% endfor %}
+            {% if post_list.exists %}
+            {% endif %}
         </div>
     </article>
     <article class="content_footer">
@@ -23,7 +14,7 @@
         <form action="{% url 'search' %}" method="get">
             {% csrf_token %}
             <div id="search">
-                <input type="search" value="{{search}}" name="search">
+                <input type="search" value="{{search}}" name="q">
                 <button type="submit" class="search_go">go!</button>
             </div>
         </form>
