@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>하루 한곡</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -22,13 +24,13 @@
     {% endif %}
     <section class="top">
         <div class="logo">
-            <a href="{% url 'index' %}"><h1>하루 <span>한곡</span></h1></a>
+            <a href="{% url 'postlist' %}"><h1>하루 <span>한곡</span></h1></a>
         </div>
         <div class="top_nav">
             <ul>
                 <li><a href="#">오늘의 추천</a></li>
                 <li><a href="#">인기 많은</a></li>
-                <li><a href="#">분위게에 맞는</a></li>
+                <li><a href="#">분위기에 맞는</a></li>
                 <li><a href="#">장르</a></li>
                 {%if user.is_authenticated %}
                 <form action="{% url 'logout' %}" method="post">
@@ -43,5 +45,23 @@
     </section>
     {% block content %}
     {% endblock %}
+    <script>
+        const Editor = toastui.Editor;
+    
+        const editor = new Editor({
+            el: document.querySelector(".write_content_area #editor"),
+            height: "600px",
+            initialEditType: "markdown",
+            previewStyle: "vertical",
+        });
+    
+        // editor.getHTML()
+        // editor.getMarkdown()
+        document.querySelector('.submitbtn').addEventListener('click', function(){
+            const markdownContent = editor.getMarkdown();
+            document.getElementById('id_content').value = markdownContent;
+        });
+    </script>
+    
 </body>
 </html>

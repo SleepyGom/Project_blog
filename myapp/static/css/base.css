@@ -282,7 +282,7 @@ body {
     outline: 2px solid #8840c7;
 }
 
-.write_form .btn {
+.write_area .submit_btn {
     font-size: 18px;
     font-weight: bold;
     color:#8840c7;

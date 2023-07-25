@@ -71,7 +71,7 @@ def tag_page(request,slug):
 
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'file_upload', 'category']
+    fields = ['title', 'content', 'file_upload', 'category', 'tags']
 
     def form_valid(self,form):
         current_user = self.request.user

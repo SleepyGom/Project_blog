@@ -16,7 +16,7 @@
     <article class="login_form">
         <form action="{% url 'login' %}" method="post" class="login_wrap">
             {% csrf_token %}
-            <a href="{% url 'index' %}"><h1>하루 한곡</h1></a>
+            <a href="{% url 'postlist' %}"><h1>하루 한곡</h1></a>
             <div class="id_area">
                 <label for="login_id">USERNAME</label>
                 <input type="username" name="username" id="login_id" class="login">

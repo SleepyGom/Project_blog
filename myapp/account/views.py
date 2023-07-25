@@ -17,11 +17,11 @@ login = LoginView.as_view(
 )
 
 logout = LogoutView.as_view(
-    next_page = settings.LOGIN_URL,
+    next_page = settings.LOGIN_REDIRECT_URL,
 )
 
 @login_required
 def profile(request):
-    return render(request, 'account/profile.html')
+    return render(request, 'blog/postlist.html')
 
 

@@ -1,19 +1,23 @@
 {% extends 'blog/base.html' %}
+
 {% load static %}
+
 
 {% block content %}
 <article class="write_form">
-    <form action="{% url 'create' %}" class="write_area">
+    <form method="post" enctype="multipart/form-data" class="write_area">
         {% csrf_token %}
+        {{ form }}
         <div class="write_title_area">
             <label for="title" class="write_title">제목 :</label>
             <input type="text" name="title" id="title">
         </div>
+        
         <div class="write_content_area">
-            <label for="write_content">내용 :</label>
-            <textarea cols="40" rows="10" name="content" id="write_content"></textarea>
+            <h3 for="write_content">내용 :</h3>
+            <div id="editor"></div>
         </div>
-        <input type="submit" vlaue="제출" class="btn">
+        <input type="submit" value="작성" class="submit_btn">
     </form>
 </article>
 {% endblock %}
